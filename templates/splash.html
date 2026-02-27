@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My App</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body class="home">
+
+<div class="splash">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+
+        <!-- College Name -->
+        <h2 class="college-name">SRI SHAKTHI INSTITUTE OF ENGINEERING AND TECHNOLOGY</h2>
+        <p class="tagline">STUDENT ATTENDENCE SYSTEM</p>
+   
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
