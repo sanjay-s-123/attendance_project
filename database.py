@@ -35,4 +35,7 @@ def check_login():
         return render_template("home.html", popup="Wrong email id")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    # Get the port from Render's environment, default to 5000 for local testing
+    port = int(os.environ.get("PORT", 5000))
+    # host='0.0.0.0' is required for the cloud to access the app
+    app.run(host='0.0.0.0', port=port)
