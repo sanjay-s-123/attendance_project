@@ -4,16 +4,20 @@ import os
 
 app = Flask(__name__)
 
-db = mysql.connector.connect(
-    host=os.environ.get("DB_HOST", "localhost"),
-    user=os.environ.get("DB_USER", "root"),
-    password=os.environ.get("DB_PASSWORD", ""),
-    database=os.environ.get("DB_NAME", "project"),
-    port=int(os.environ.get("DB_PORT", 3306))
-)
-
-# Use dictionary=True so we can use user['password'] in our logic
-cursor = db.cursor(dictionary=True)
+try:
+    db = mysql.connector.connect(
+        host=os.environ.get("DB_HOST"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME"),
+        port=int(os.environ.get("DB_PORT", 3306)),
+        # Adding SSL is often the missing piece for cloud hosting
+        ssl_ca=None, 
+        ssl_disabled=False 
+    )
+    cursor = db.cursor(dictionary=True)
+except Exception as e:
+    print(f"ERROR: Could not connect to MySQL: {e}")
 
 @app.route('/')
 def splash():
