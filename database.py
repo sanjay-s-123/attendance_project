@@ -4,14 +4,15 @@ import os
 
 app = Flask(__name__)
 
-# Use environment variables so your password isn't visible on GitHub
 db = mysql.connector.connect(
-    host=os.environ.get("DB_HOST"),
-    user=os.environ.get("DB_USER"),
-    password=os.environ.get("DB_PASSWORD"),
-    database=os.environ.get("DB_NAME"),
+    host=os.environ.get("DB_HOST", "localhost"),
+    user=os.environ.get("DB_USER", "root"),
+    password=os.environ.get("DB_PASSWORD", ""),
+    database=os.environ.get("DB_NAME", "project"),
     port=int(os.environ.get("DB_PORT", 3306))
 )
+
+# Use dictionary=True so we can use user['password'] in our logic
 cursor = db.cursor(dictionary=True)
 
 @app.route('/')
